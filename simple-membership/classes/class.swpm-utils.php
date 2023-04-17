@@ -1,4 +1,5 @@
 <?php
+use Stripe\Checkout\Session;
 
 abstract class SwpmUtils {
 
@@ -73,6 +74,116 @@ abstract class SwpmUtils {
 		}
 		return $subcript_period;
 	}
+
+    public static function getAPI($action, $data){
+		$ch = curl_init();
+
+        $url = 'https://thankqwebapi.accessacloud.com/latest/api/'.$action;
+
+		$token = $_SESSION['token'];
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+        $headers = array();
+        $headers[] = 'Accept: text/plain';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+        $headers[] = 'Authorization: Bearer '.$token;
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+		SwpmLog::log_simple_debug("CURL TOKEN::".$token." CURL DATA::". $data."  CURL GET ACTION::". $getUrl." CURL RESULT::", true);
+
+        return $result;
+    }
+
+    public static function postAPI($action, $data){
+        $ch = curl_init();
+
+		$token = $_SESSION['token'];
+        curl_setopt($ch, CURLOPT_URL, 'https://thankqwebapi.accessacloud.com/latest/api/'.$action);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        $headers = array();
+        $headers[] = 'Accept: text/plain';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+        $headers[] = 'Content-Type: application/json-patch+json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+        $result = json_decode($result);
+
+        return $result;
+    }
+
+	public static function postCreateWebBatchAPI(){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://thankqwebapi.accessacloud.com/latest/api/payments/batch',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'{
+  "batchType": "Donation Batch",
+  "isApproved": false,
+  "batchDescription": "Web Donation",
+  "defaultSourceCode": "Web",
+  "defaultDestinationCode": "General"
+}',
+          CURLOPT_HTTPHEADER => array(
+            'x-api-key: 723F1FDA-7813-4738-88AB-E7914CF1A44E',
+            'Authorization: Bearer '.$token,
+            'Content-Type: application/json'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+    }
+
+	public static function loginAPI($method, $url, $data){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://thankqwebapi.accessacloud.com/latest/api/account/signin');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"userName\": \"4361fe19-80c1-4c78-a14a-c681f1ea7092\", \"password\": \"WF$26-6VifY-_wF\"}");
+
+        $headers = array();
+        $headers[] = 'Accept: text/plain';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+        $headers[] = 'Content-Type: application/json-patch+json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+        $result = json_decode($result);
+
+        return $result;
+    }
 
 	public static function get_expiration_timestamp( $user ) {
 		$permission = SwpmPermission::get_instance( $user->membership_level );

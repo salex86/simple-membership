@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "Simple Membership", "Simple Membership.phpproj", "{B18B22E5-B781-4DC2-980D-AEA0D27D0059}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B18B22E5-B781-4DC2-980D-AEA0D27D0059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18B22E5-B781-4DC2-980D-AEA0D27D0059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18B22E5-B781-4DC2-980D-AEA0D27D0059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18B22E5-B781-4DC2-980D-AEA0D27D0059}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1897C86C-3EE8-4834-A63C-C9DA56A8C5A6}
+	EndGlobalSection
+EndGlobal

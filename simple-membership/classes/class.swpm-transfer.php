@@ -12,12 +12,13 @@ class SwpmTransfer {
         'address_state' => '', 'address_zipcode' => '',
         'company_name' => '', 'country' => '',
         'gender' => 'not specified',
+        'extra_info' => 'na',
         'membership_level' => '2');
-    
+
     public static $default_level_fields = array(
         'alias' => '', 'role' => '',
         'subscription_period' => '', 'subscription_duration_type' => SwpmMembershipLevel::NO_EXPIRY);
-    
+
     public static $admin_messages = array();
     private static $_this;
 
@@ -39,7 +40,7 @@ class SwpmTransfer {
         $messages = new SwpmMessages();
         $messages->set($key, $value);
     }
-    
+
     /*** Deprecated function - exists only for backwards compatibility ***/
     public static function get_real_ip_addr() {
         return SwpmUtils::get_user_ip_address();

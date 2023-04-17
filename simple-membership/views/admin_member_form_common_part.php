@@ -49,3 +49,13 @@
     <th scope="row"><label for="member_since"><?php echo SwpmUtils::_('Member Since') ?> </label></th>
     <td><input class="regular-text" name="member_since" type="text" id="member_since" value="<?php echo esc_attr($member_since); ?>" /></td>
 </tr>
+<tr class="swpm-admin-edit-member-since">
+    <th scope="row">
+        <label for="member_since">
+            <?php echo SwpmUtils::_('Serial Number') ?>
+        </label>
+    </th>
+    <td>
+        <input class="regular-text" name="extra_info" type="text" id="extra_info" value="<?php echo esc_attr($extra_info); ?>" />
+    </td>
+</tr>

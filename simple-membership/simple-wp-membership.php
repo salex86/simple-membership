@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Simple WordPress Membership
-Version: 4.1.4
-Plugin URI: https://simple-membership-plugin.com/
+Plugin Name: Custom Nycos Membership
+Version: 0.1
+Plugin URI: https://nycos.co.uk
 Author: smp7, wp.insider
 Author URI: https://simple-membership-plugin.com/
-Description: A flexible, well-supported, and easy-to-use WordPress membership plugin for offering free and premium content from your WordPress site.
+Description: Customised membership plugin built for NYCOS connecting to Access CRM
 Text Domain: simple-membership
 Domain Path: /languages/
 Requires PHP: 5.6

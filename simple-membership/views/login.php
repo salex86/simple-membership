@@ -22,13 +22,13 @@ else{
                 <label for="swpm_user_name" class="swpm-label"><?php echo SwpmUtils::_($swpm_username_label) ?></label>
             </div>
             <div class="swpm-username-input">
-                <input type="text" class="swpm-text-field swpm-username-field" id="swpm_user_name" value="" size="25" name="swpm_user_name" />
+                <input type="text" class="swpm-text-field swpm-username-field form-control" id="swpm_user_name" value="" size="25" name="swpm_user_name" />
             </div>
             <div class="swpm-password-label">
                 <label for="swpm_password" class="swpm-label"><?php echo SwpmUtils::_('Password') ?></label>
             </div>
             <div class="swpm-password-input">                
-                <input type="password" class="swpm-text-field swpm-password-field" id="swpm_password" value="" size="25" name="swpm_password" />                
+                <input type="password" class="swpm-text-field swpm-password-field form-control" id="swpm_password" value="" size="25" name="swpm_password" />                
             </div>
             <?php if( $display_password_toggle ){ ?>
                 <div class="swpm-password-input-visibility">                                        
@@ -44,14 +44,12 @@ else{
             <div class="swpm-before-login-submit-section"><?php echo apply_filters('swpm_before_login_form_submit_button', ''); ?></div>
 
             <div class="swpm-login-submit">
-                <input type="submit" class="swpm-login-form-submit" name="swpm-login" value="<?php echo SwpmUtils::_('Login') ?>"/>
+                <input type="submit" class="swpm-login-form-submit btn btn-primary" name="swpm-login" value="<?php echo SwpmUtils::_('Login') ?>"/>
             </div>
             <div class="swpm-forgot-pass-link">
-                <a id="forgot_pass" class="swpm-login-form-pw-reset-link"  href="<?php echo $password_reset_url; ?>"><?php echo SwpmUtils::_('Forgot Password?') ?></a>
+                <a id="forgot_pass" class="swpm-login-form-pw-reset-link btn btn-primary"  href="nycos-forgot"><?php echo SwpmUtils::_('Forgot Password?') ?></a>
             </div>
-            <div class="swpm-join-us-link">
-                <a id="register" class="swpm-login-form-register-link" href="<?php echo $join_url; ?>"><?php echo SwpmUtils::_('Join Us') ?></a>
-            </div>
+
             <div class="swpm-login-action-msg">
                 <span class="swpm-login-widget-action-msg"><?php echo apply_filters( 'swpm_login_form_action_msg', $auth->get_message() ); ?></span>
             </div>

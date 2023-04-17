@@ -52,6 +52,7 @@ class SwpmAuth {
 			);
 			do_action( 'swpm_before_login_request_is_processed', $args );
 
+
 			//First, lets make sure this user is not already logged into the site as an "Admin" user. We don't want to override that admin login session.
 			if ( current_user_can( 'administrator' ) ) {
 				//This user is logged in as ADMIN then trying to do another login as a member. Stop the login request processing (we don't want to override your admin login session).
@@ -82,6 +83,9 @@ class SwpmAuth {
 				}
 			}
 
+            $response = SwpmUtils::loginAPI("POST","/account/signin","");
+            //SwpmLog::log_auth_debug( 'AccessCloud Token: ' . $response->accessToken  . ', Was returned ', true );
+			$_SESSION['token'] = $response->accessToken;
 			//Lets process the request. Check username and password
 			$user = sanitize_user( $swpm_user_name );
 			$pass = trim( $swpm_password );
@@ -100,7 +104,7 @@ class SwpmAuth {
 			if ( ! $check ) {
 				$this->isLoggedIn    = false;
 				$this->userData      = null;
-				$this->lastStatusMsg = SwpmUtils::_( 'Password Empty or Invalid.' );
+				$this->lastStatusMsg = SwpmUtils::_( 'We have recently migrated our web portal. If you are having trouble logging in please try the forgot password page' );
 				return false;
 			}
 			if ( $this->check_constraints() ) {

@@ -1,0 +1,17 @@
+{
+    "name": "stephen/simple-membership",
+    "autoload": {
+        "psr-4": {
+            "Stephen\\SimpleMembership\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephen",
+            "email": "stephen@riversidetma.com"
+        }
+    ],
+    "require": {
+        "omnipay/sagepay": "^4.0"
+    }
+}

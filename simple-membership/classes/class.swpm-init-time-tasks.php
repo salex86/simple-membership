@@ -43,6 +43,7 @@ class SwpmInitTimeTasks {
 			$this->register_member();
 			$this->check_and_do_email_activation();
 			$this->edit_profile();
+			$this->nycos_update_profile();
 			SwpmCommentFormRelated::check_and_restrict_comment_posting_to_members();
 		} else {
 			//Do admin side init time tasks
@@ -154,6 +155,12 @@ class SwpmInitTimeTasks {
 		}
 	}
 
+	public function nycos_update_profile(){
+        $registration = filter_input( INPUT_POST, 'swpm_registration_submit' );
+		if ( ! empty( $registration ) ) {
+			SwpmFrontRegistration::get_instance()->register_front_end();
+		}
+    }
 	private function register_member() {
 		$registration = filter_input( INPUT_POST, 'swpm_registration_submit' );
 		if ( ! empty( $registration ) ) {

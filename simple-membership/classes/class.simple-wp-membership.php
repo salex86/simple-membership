@@ -60,6 +60,32 @@ class SimpleWpMembership {
         add_shortcode('swpm_login_form', array(&$this, 'login'));
         add_shortcode('swpm_reset_form', array(&$this, 'reset'));
 
+
+        add_shortcode('nycos_password', array(&$this, 'nycos_password'));
+        add_shortcode('nycos_home', array(&$this, 'nycos_home'));
+        add_shortcode('nycos_profile', array(&$this, 'nycos_profile'));
+
+        add_shortcode('nycos_memberships', array(&$this, 'nycos_memberships'));
+        add_shortcode('nycos_membership_payment', array(&$this, 'nycos_membership_payment'));
+        add_shortcode('nycos_new_membership', array(&$this, 'nycos_new_membership'));
+        add_shortcode('nycos_mem_payments', array(&$this, 'nycos_mem_payments'));
+
+        add_shortcode('nycos_donation', array(&$this, 'nycos_donation'));
+        add_shortcode('nycos_donations', array(&$this, 'nycos_donations'));
+        add_shortcode('nycos_public_donate', array(&$this, 'nycos_public_donate'));
+
+        add_shortcode('nycos_giftaid', array(&$this, 'nycos_giftaid'));
+        add_shortcode('nycos_new_giftaid', array(&$this, 'nycos_new_giftaid'));
+        add_shortcode('nycos_bookings', array(&$this, 'nycos_bookings'));
+
+        add_shortcode('nycos_book_event', array(&$this, 'nycos_book_event'));
+
+        add_shortcode('nycos_booking_confirmation', array(&$this, 'nycos_booking_confirmation'));
+        add_shortcode('nycos_booking_review', array(&$this, 'nycos_booking_review'));
+
+        add_shortcode('nycos_communication', array(&$this, 'nycos_communication'));
+        add_shortcode('nycos_download', array(&$this, 'nycos_download'));
+
         add_action('wp_head', array(&$this, 'wp_head_callback'));
         add_action('save_post', array(&$this, 'save_postdata'));
         add_action('admin_notices', array(&$this, 'do_admin_notices'));
@@ -123,12 +149,12 @@ class SimpleWpMembership {
             //This filter has been overridden in a custom code/plugin.
             return $response;
         }
-        
+
         if ( is_admin() ) {
             //No need to filter on the admin dashboard side
             return $response;
         }
-        
+
         //Check if this is a WP REST API query for media.
         $req_route = $request->get_route();
         //SwpmLog::log_simple_debug($req_route, true);
@@ -137,7 +163,7 @@ class SimpleWpMembership {
             //SwpmLog::log_simple_debug('Not a media request.', true);
             return $response;
         }
-        
+
         //Check if the media belongs to a post/page that is protected.
         $req_qry_params = $request->get_query_params();
         if ( isset ( $req_qry_params['parent'] ) ){
@@ -162,7 +188,7 @@ class SimpleWpMembership {
             return $response;
         }
     }
-    
+
     public function filter_attachment($content, $post_id) {
         if (is_admin()) {//No need to filter on the admin side
             return $content;
@@ -321,7 +347,7 @@ class SimpleWpMembership {
         SwpmLog::log_auth_debug("Triggering swpm_after_login hook.", true);
         do_action('swpm_after_login');
         if (!SwpmUtils::is_ajax()) {
-            $redirect_url = apply_filters('swpm_after_login_redirect_url', SIMPLE_WP_MEMBERSHIP_SITE_HOME_URL);
+            $redirect_url = apply_filters('swpm_after_login_redirect_url', SIMPLE_WP_MEMBERSHIP_SITE_HOME_URL . "/nycos-home");
             wp_redirect($redirect_url);
             exit(0);
         }
@@ -468,7 +494,277 @@ class SimpleWpMembership {
         return ob_get_clean();
     }
 
-    public function profile_form() {
+    /* NYCOS PAGES */
+    public function nycos_home() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_home.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_donate() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_donate.php', false);
+            return ob_get_clean();
+        }
+        ob_start();
+        //Load the welcome template
+        SwpmUtilsTemplate::swpm_load_template('nycos_donate.php', false);
+        return ob_get_clean();
+    }
+
+    public function nycos_public_membership() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_public_membership.php', false);
+            return ob_get_clean();
+        }
+        SwpmUtilsTemplate::swpm_load_template('nycos_public_membership.php', false);
+        return ob_get_clean();
+    }
+
+    public function nycos_password() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('edit.php', false);
+            return ob_get_clean();
+
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_public_donate() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+           SwpmUtilsTemplate::swpm_load_template('nycos_donation.php', false);
+            return ob_get_clean();
+
+        }
+        SwpmUtilsTemplate::swpm_load_template('nycos_donation.php', false);
+        return ob_get_clean();
+    }
+
+    public function nycos_new_member() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_new_member.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_new_membership() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_new_membership1.php', false);
+            return ob_get_clean();
+        }
+        ob_start();
+        //Load the welcome template
+        SwpmUtilsTemplate::swpm_load_template('nycos_new_membership1.php', false);
+        return ob_get_clean();
+    }
+
+    public function nycos_membership_payment() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_membership_payment.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_download() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_download.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_communication() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_communication.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_booking_confirmation() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_booking_confirmation.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_booking_review() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_booking_review.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_book_event() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_book_event1.php', false);
+            return ob_get_clean();
+        }
+        SwpmUtilsTemplate::swpm_load_template('nycos_book_event1.php', false);
+        return ob_get_clean();
+    }
+
+
+
+    public function nycos_memberships() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_memberships.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_giftaid() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_giftaid.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_new_giftaid() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_new_giftaid.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_bookings() {
         $auth = SwpmAuth::get_instance();
         $this->notices();
         if ($auth->is_logged_in()) {
@@ -478,7 +774,92 @@ class SimpleWpMembership {
             }
             ob_start();
             //Load the edit profile template
-            SwpmUtilsTemplate::swpm_load_template('edit.php', false);
+            SwpmUtilsTemplate::swpm_load_template('nycos_bookings.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_mem_payments() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the edit profile template
+            SwpmUtilsTemplate::swpm_load_template('nycos_mem_payments.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_donation() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_donation.php', false);
+            return ob_get_clean();
+        }
+        ob_start();
+        //Load the welcome template
+        SwpmUtilsTemplate::swpm_load_template('nycos_donation.php', false);
+        return ob_get_clean();
+    }
+
+    public function nycos_donations() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the edit profile template
+            SwpmUtilsTemplate::swpm_load_template('nycos_donations.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_profile() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the edit profile template
+            SwpmUtilsTemplate::swpm_load_template('nycos_profile.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function profile_form() {
+        $auth = SwpmAuth::get_instance();
+
+       // $CRMdata = json_decode(SwpmUtils::callAPI("GET","/contacts/",));
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the edit profile template
+            SwpmUtilsTemplate::swpm_load_template('nycos_profile.php', false);
             return ob_get_clean();
         }
         return SwpmUtils::_('You are not logged in.');
@@ -716,7 +1097,7 @@ class SimpleWpMembership {
         wp_register_script('jquery.validationEngine-en', SIMPLE_WP_MEMBERSHIP_URL . '/js/jquery.validationEngine-en.js', array('jquery'), SIMPLE_WP_MEMBERSHIP_VER);
         wp_register_script('swpm.validationEngine-localization', SIMPLE_WP_MEMBERSHIP_URL . '/js/swpm.validationEngine-localization.js', array('jquery'), SIMPLE_WP_MEMBERSHIP_VER);
         wp_register_script('swpm.password-toggle', SIMPLE_WP_MEMBERSHIP_URL . '/js/swpm.password-toggle.js', array('jquery'), SIMPLE_WP_MEMBERSHIP_VER);
-        
+
     }
 
     public static function enqueue_validation_scripts($add_params = array()) {

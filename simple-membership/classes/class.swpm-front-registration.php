@@ -275,6 +275,7 @@ class SwpmFrontRegistration extends SwpmRegistration {
 		$wp_user_info['user_email']      = $member_info['email'];
 		$wp_user_info['nickname']        = $member_info['user_name'];
 		$wp_user_info['first_name']      = $member_info['first_name'];
+		$wp_user_info['extra_info']      = $member_info['extra_info'];
 		$wp_user_info['last_name']       = $member_info['last_name'];
 		$wp_user_info['user_login']      = $member_info['user_name'];
 		$wp_user_info['password']        = $member_info['plain_password'];
@@ -323,7 +324,9 @@ class SwpmFrontRegistration extends SwpmRegistration {
 			$password_also_changed = false;
 			if ( isset( $member_info['plain_password'] ) ) {
 				//Password was also changed.
-				$msg_str = '<div class="swpm-profile-update-success">' . SwpmUtils::_( 'Profile updated successfully. You will need to re-login since you changed your password.' ) . '</div>';
+				$msg_str = '<div class="swpm-profile-update-success">' . SwpmUtils::_( 'Profile updated successfully. You will need to re-login since you changed your password.' ) . '<a class="btn btn-primary" href="nycos-login">
+                    Login
+                </a></div>';
 				$message = array(
 					'succeeded' => true,
 					'message'   => $msg_str,
@@ -344,7 +347,8 @@ class SwpmFrontRegistration extends SwpmRegistration {
 				//Password was also changed. Logout the user's current session.
 				wp_logout(); //Log the user out from the WP user session also.
 				SwpmLog::log_simple_debug( 'Member has updated the password from profile edit page. Logging the user out so he can re-login using the new password.', true );
-			}
+				session_destroy();
+            }
 
 			SwpmTransfer::get_instance()->set( 'status', $message );
 

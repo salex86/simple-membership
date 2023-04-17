@@ -38,6 +38,16 @@ $user_name = apply_filters('swpm_registration_form_set_username', $user_name);
                 <td><label for="last_name"><?php echo SwpmUtils::_('Last Name') ?></label></td>
                 <td><input type="text" id="last_name" value="<?php echo esc_attr($last_name); ?>" size="50" name="last_name" /></td>
             </tr>
+            <tr class="swpm-registration-lastname-row" <?php apply_filters('swpm_registration_form_lastname_tr_attributes', ''); ?>>
+                <td>
+                    <label for="last_name">
+                        <?php echo SwpmUtils::_('Serial Number') ?>
+                    </label>
+                </td>
+                <td>
+                    <input type="text" id="extra_info" value="<?php echo esc_attr($extra_info); ?>" size="50" name="extra_info" />
+                </td>
+            </tr>
             <tr class="swpm-registration-membership-level-row" <?php apply_filters('swpm_registration_form_membership_level_tr_attributes', ''); ?>>
                 <td><label for="membership_level"><?php echo SwpmUtils::_('Membership Level') ?></label></td>
                 <td>

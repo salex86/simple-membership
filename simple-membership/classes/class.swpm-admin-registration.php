@@ -28,8 +28,10 @@ class SwpmAdminRegistration extends SwpmRegistration {
 		global $wpdb;
 		$member = SwpmTransfer::$default_fields;
 		$form   = new SwpmForm( $member );
+		SwpmLog::log_simple_debug( 'form info '.print_r($form,true), true );
 		if ( $form->is_valid() ) {
 			$member_info = $form->get_sanitized_member_form_data();
+            SwpmLog::log_simple_debug( 'member info '.print_r($member_info,true), true );
 
                         //First, check if email or username belongs to an existing admin user. Bail if it does.
                         SwpmMemberUtils::check_and_die_if_email_belongs_to_admin_user($member_info['email']);
@@ -56,6 +58,7 @@ class SwpmAdminRegistration extends SwpmRegistration {
 				$wp_user_info['last_name'] = $member_info['last_name'];
 			}
 			$wp_user_info['user_login']      = $member_info['user_name'];
+			$wp_user_info['extra_info']      = $member_info['extra_info'];
 			$wp_user_info['password']        = $plain_password;
 			$wp_user_info['role']            = $wpdb->get_var( $query );
 			$wp_user_info['user_registered'] = date( 'Y-m-d H:i:s' );

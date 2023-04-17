@@ -156,6 +156,11 @@ class SwpmForm {
         $this->sanitized['country'] = wp_kses($country, array());
     }
 
+    protected function extra_info() {
+        $extra_info = isset($_POST['extra_info']) ? sanitize_text_field($_POST['extra_info']) : '';
+        $this->sanitized['extra_info'] = wp_kses($extra_info, array());
+    }
+
     protected function company_name() {
         $company_name = isset($_POST['company_name']) ? sanitize_text_field($_POST['company_name']) : '';
         $this->sanitized['company_name'] = $company_name;
@@ -228,10 +233,6 @@ class SwpmForm {
     }
 
     protected function referrer() {
-
-    }
-
-    protected function extra_info() {
 
     }
 
