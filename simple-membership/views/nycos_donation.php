@@ -1,7 +1,9 @@
 <?php
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/SagePay.php');
+require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/ElavonAPI.php');
 require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/NycosAPI.php');
 $nycosAPI = new NycosAPI();
+
+session_start();
 
 $auth = SwpmAuth::get_instance();
 $user_data = (array) $auth->userData;
@@ -56,16 +58,27 @@ $contact = $nycosAPI->getAPI('contacts/'.$extra_info.'?IncludeConsent=true','');
         </ul>
         <?php if (empty($_REQUEST['nextStep'])) { ?>
         <form id="userAccountSetupForm" name="userAccountSetupForm" enctype="multipart/form-data" method="POST">
-            <input type="hidden" name="nextStep" value="3" />
+            <input type="hidden" name="nextStep" value="2" />
             <!-- Step 1 Content -->
-            <section id="step-1" class="form-step">               
-                  <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/donation_select.php'); ?>
+            <section id="step-1" class="form-step">
+                <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/donation_select.php'); ?>
             </section>
+        </form>
+        <?php }
+              if ($_REQUEST['nextStep']==2) { ?>
+        <form>
+            <input type="hidden" name="nextStep" value="3" />
+            <input type="hidden" name="amount" value="<?= $_REQUEST["amount"] ?>" />
+            <?php if (!empty($_REQUEST["giftaid"])){
+                      print ' <input type="hidden" name="giftaid" value="1" />';
+                  } ?>
+           
+            <input type="hidden" name="destinationCode" value="<?= $_REQUEST["destinationCode"] ?>" />
             <!-- Step 2 Content, default hidden on page load. -->
-            <section id="step-2" class="form-step d-none">
+            <section id="step-2" class="form-step">
                 <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/profile_form.php'); ?>
             </section>
-                 </form>
+        </form>  
         <?php }
               if ($_REQUEST['nextStep']==3) {                 
                   if (empty($contact->serialNumber)) {
@@ -76,10 +89,6 @@ $contact = $nycosAPI->getAPI('contacts/'.$extra_info.'?IncludeConsent=true','');
         ?>
             <section id="step-3" class="form-step ">
                 <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/donation_review.php'); ?>
-            </section>
-        <?php } if ($_REQUEST['nextStep']==4) { ?>
-               <section id="step-4" class="form-step ">             
-                <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/donation_confirmation.php'); ?>
             </section>
         <?php } ?>
     </div>
@@ -120,9 +129,7 @@ h2 {
 .mt-3 {
     margin-top: 2rem;
 }
-.d-none {
-    display: none;
-}
+
 .form-step {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -243,80 +250,4 @@ ul.form-stepper li a .form-stepper-circle {
     cursor: default;
 }
 </style>
-<script>
 
-
-
-/**
- * Define a function to navigate betweens form steps.
- * It accepts one parameter. That is - step number.
- */
-const navigateToFormStep = (stepNumber) => {
-    /**
-     * Hide all form steps.
-     */
-    document.querySelectorAll(".form-step").forEach((formStepElement) => {
-        formStepElement.classList.add("d-none");
-    });
-    /**
-     * Mark all form steps as unfinished.
-     */
-    document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
-        formStepHeader.classList.add("form-stepper-unfinished");
-        formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
-    });
-    /**
-     * Show the current form step (as passed to the function).
-     */
-    document.querySelector("#step-" + stepNumber).classList.remove("d-none");
-    /**
-     * Select the form step circle (progress bar).
-     */
-    const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
-    /**
-     * Mark the current form step as active.
-     */
-    formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
-    formStepCircle.classList.add("form-stepper-active");
-    /**
-     * Loop through each form step circles.
-     * This loop will continue up to the current step number.
-     * Example: If the current step is 3,
-     * then the loop will perform operations for step 1 and 2.
-     */
-    for (let index = 0; index < stepNumber; index++) {
-        /**
-         * Select the form step circle (progress bar).
-         */
-        const formStepCircle = document.querySelector('li[step="' + index + '"]');
-        /**
-         * Check if the element exist. If yes, then proceed.
-         */
-        if (formStepCircle) {
-            /**
-             * Mark the form step as completed.
-             */
-            formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
-            formStepCircle.classList.add("form-stepper-completed");
-        }
-    }
-};
-/**
- * Select all form navigation buttons, and loop through them.
- */
-document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
-    /**
-     * Add a click event listener to the button.
-     */
-    formNavigationBtn.addEventListener("click", () => {
-        /**
-         * Get the value of the step.
-         */
-        const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
-        /**
-         * Call the function to navigate to the target form step.
-         */
-        navigateToFormStep(stepNumber);
-    });
-});
-</script>

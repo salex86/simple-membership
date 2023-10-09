@@ -42,12 +42,15 @@ else{
             </div>
 
             <div class="swpm-before-login-submit-section"><?php echo apply_filters('swpm_before_login_form_submit_button', ''); ?></div>
-
-            <div class="swpm-login-submit">
-                <input type="submit" class="swpm-login-form-submit btn btn-primary" name="swpm-login" value="<?php echo SwpmUtils::_('Login') ?>"/>
-            </div>
-            <div class="swpm-forgot-pass-link">
-                <a id="forgot_pass" class="swpm-login-form-pw-reset-link btn btn-primary"  href="nycos-forgot"><?php echo SwpmUtils::_('Forgot Password?') ?></a>
+            <div class="row">
+                <div class="col-md-3 swpm-login-submit">
+                    <input type="submit" class="swpm-login-form-submit btn btn-primary" name="swpm-login" value="<?php echo SwpmUtils::_('Login') ?>" />
+                </div>
+                <div class="col-md-3 swpm-forgot-pass-link">
+                    <a id="forgot_pass" class="swpm-login-form-pw-reset-link btn btn-primary" href="nycos-forgot">
+                        <?php echo SwpmUtils::_('Forgot Password?') ?>
+                    </a>
+                </div>
             </div>
 
             <div class="swpm-login-action-msg">

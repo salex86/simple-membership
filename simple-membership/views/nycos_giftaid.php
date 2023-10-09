@@ -33,7 +33,7 @@ $giftaids = $nycosAPI->getGiftAid($extra_info)->data;
             complete a new <strong>GAD</strong>.
         </li>
         <li>
-            close your existing <strong>GAD</strong>(s).
+            close your existing <strong>GAD</strong>(s). - Contact us at <a href:"mailto@info@nycos.co.uk"> Close your GAD</a>
         </li>
     </ul>
     <p>

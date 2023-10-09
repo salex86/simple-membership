@@ -4,10 +4,17 @@ require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/class/Mailer.class.php');
 
 $nycosAPI = new NycosAPI();
 if (empty($_SESSION["contactDetails"])){
-        print "There has been an error please contact NYCOS, quoting this message BookErr01";
-        return;
-
+    print "There has been an error or you have refreshed the page in error. Please contact NYCOS, quoting this message BookErr01";
+	SwpmLog::log_simple_debug( 'Booking Error no contact ', true );
+    return;
 }
+
+if (empty($_SESSION["payStart"])){
+    print "There has been an error or you have refreshed the page in error. Please contact NYCOS, quoting this message BookErr01";
+	SwpmLog::log_simple_debug( 'Booking error refresh ', true );
+    return;
+}
+
 if($_REQUEST['crypt']){
     $sagePay = new SagePay();
     $responseArray = $sagePay->decode($_REQUEST['crypt']);
@@ -98,7 +105,7 @@ if($_REQUEST['crypt']){
 
             $booking->additionalAttendees = $additionalAttendees;
             $booking->eventId = $event->eventId;
-           // SwpmLog::log_simple_debug( 'Payment for Booking made '.print_r($booking,true), true );
+            // SwpmLog::log_simple_debug( 'Payment for Booking made '.print_r($booking,true), true );
             //use values to build up the bookingObject
             $array = json_decode(json_encode($booking), true);
             json_encode($array);
@@ -216,21 +223,22 @@ if($_REQUEST['crypt']){
     $email->setBookingMessage($event->eventId,$orderid,0,count($_SESSION['attendeeData']),$mainContact);
     $email->send($mainContact->emailAddress);
 
-    $responseMessage = "Thank you for making your booking!";
+    $responseMessage = "Your booking has been succesfull,The booking ID is ".$event->eventId. ", please check your email for confirmation";
 
 }
 
+$_SESSION["payStart"]="";
 
 ?>
 <div class="autoSummaryDiv">
-  <fieldset>
-      <h2 class="font-normal">Confirmation</h2>
-      <!-- Step 3 input fields -->
-      <div class="mt-3">
-          <?=$responseMessage?>
-      </div>
+    <fieldset>
+        <h2 class="font-normal">Confirmation</h2>
+        <!-- Step 3 input fields -->
+        <div class="mt-3">
+            <?=$responseMessage?>
+        </div>
 
 
 
-</fieldset>
+    </fieldset>
 </div>

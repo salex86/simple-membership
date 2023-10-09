@@ -1,5 +1,5 @@
 <?php
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/SagePay.php');
+
 require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/NycosAPI.php');
 session_start();
 $nycosAPI = new NycosAPI();
@@ -9,8 +9,6 @@ $user_data = (array) $auth->userData;
 
 extract($user_data, EXTR_SKIP);
 $contact = $nycosAPI->getAPI('contacts/'.$extra_info,'');
-
-$txCode= rand(0,32000)*rand(0,32000);
 
 if (empty($_REQUEST["membershipDetailId"])){
     echo "You accesed this page from an unknown location";
@@ -38,7 +36,7 @@ $membership = $nycosAPI->getMembership($_REQUEST['membershipDetailId']);
                 </a>
             </li>
             <!-- Step 2 -->
-            <li class="<?php ($_REQUEST['crypt'])?  print "form-stepper-active" : print "form-stepper-unfinished"  ?> text-center form-stepper-list" step="2">
+            <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
                 <a class="mx-2">
                     <span class="form-stepper-circle text-muted">
                         <span>2</span>
@@ -49,7 +47,7 @@ $membership = $nycosAPI->getMembership($_REQUEST['membershipDetailId']);
         </ul>
         <!-- Step Wise Form Content -->    
      
-        <?php if (empty($_REQUEST['crypt'])) { ?>
+        <?php if (empty($_REQUEST['orderId'])) { ?>
             <section id="step-1" class="form-step">                
                 <?php include(SIMPLE_WP_MEMBERSHIP_PATH.'/views/partial/pay_membership_review.php'); ?>
             </section>

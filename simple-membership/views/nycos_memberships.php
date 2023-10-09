@@ -47,6 +47,7 @@ foreach($children as $child) {
             <tbody>
                 <?php
                 foreach($idArray as $serialNumber){
+                     
                     $item = $nycosAPI->getMemberships($serialNumber)->data;
                 foreach($item as $membership) {
                     if (strtotime($membership->expiryDate) > time() ) {
@@ -58,6 +59,9 @@ foreach($children as $child) {
                         if (empty($membership->nextPayment)){
                             $paymentAmount=0;
                         }
+
+
+
                 ?>
                 <tr>
                     <td class="tdWide">
@@ -72,7 +76,8 @@ foreach($children as $child) {
                             Need help with fees? You can ask for a fee reduction <a href="https://www.nycos.co.uk/sing/financial-assistance-application/">here</a>
                             
                         </p>
-                        <?php if (!empty($membership->nextPayment) and $membership->paymentMethod=="Credit Card") { ?>
+                        <?php if (!empty($membership->nextPayment) and $membership->paymentMethod=="Credit Card") {
+                        ?>
                        
                         <a href="/NYCOS-Membership-payment?membershipDetailId=<?= $membership->membershipDetailId ?>" name="pay" value="pay by card" id="pay" class="btn btn-primary">Pay By Card</a>
                         <?php } ?>
@@ -97,10 +102,11 @@ foreach($children as $child) {
     <br />
     <h3>Regional Choir Memberships</h3>
     <p>
-        Renew or start a <a href="rc-membership.aspx" title="Regional Choir">NYCOS Regional Choir Membership</a>.
+        Renew or start a <a href="nycos-rcmembership" title="Regional Choir">NYCOS Regional Choir Membership</a>.
     </p>
     <p class="hidden">
         <a href="javascript:window.print()" title="Print this page">Print</a> this page.
     </p>
 </main>
 <a href="/nycos-home" id="backHome" class="btn btn-primary">Back</a>
+<a href="nycos_memberships.php">nycos_memberships.php</a>

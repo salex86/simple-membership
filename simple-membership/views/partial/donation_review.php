@@ -1,22 +1,50 @@
 <?php
 
- $contact = new Contact( $_SESSION["contactDetails"]);
+//create contact if not logged in
 
-   $sagePay = new SagePay();
-    $sagePay->setCurrency('GBP');
-    $sagePay->setAmount($_REQUEST['amount']);
-    $sagePay->setVendorTxCode(rand(0,32000)*rand(0,32000));
-    $sagePay->setDescription('New Donation');
-    $sagePay->setBillingSurname($contact->keyname);
-    $sagePay->setBillingFirstnames($contact->firstName);
-    if ($contact->town){$sagePay->setBillingCity($contact->town);}
-    if ($contact->postcode){$sagePay->setBillingPostCode($contact->postcode); }
-    if ($contact->address){$sagePay->setBillingAddress1($contact->address);}
-    $sagePay->setBillingCountry('GB');
-    $sagePay->setDeliverySameAsBilling();
-    $sagePay->setSuccessURL('https://nycos.co.uk/nycos-donation?dest='.$_REQUEST["destinationCode"].'&giftaid='.$_REQUEST['giftaid'].'&nextStep=4');
-    $sagePay->setFailureURL('https://nycos.co.uk/nycos-donation/');
+if (empty($contact->serialNumber)){
+
+    $contact = new Contact($_SESSION["contactDetails"]);
+
+    $contact = $nycosAPI->postNewContact($contact->title,$contact->firstName,$contact->keyname,
+            $contact->address,$contact->town,$contact->county,$contact->postcode,$contact->country,$contact->emailAddress,$contact->mobileNumber,
+            $contact->dayTelephone,$contact->eveningTelephone);
+
+
+    if (empty($contact->serialNumber)){
+        $theContact = new Contact( $_SESSION["contactDetails"]);
+        if (array_key_exists("Mail",$theContact->consent)){
+            $nycosAPI->postContactConsent($contact->serialNumber,"Mail","Granted");
+        } else {
+            $nycosAPI->postContactConsent($contact->serialNumber,"Mail","Denied");
+        }
+        if (array_key_exists("Email",$theContact->consent)){
+            $nycosAPI->postContactConsent($contact->serialNumber,"Email","Granted");
+        } else {
+            $nycosAPI->postContactConsent($contact->serialNumber,"Email","Denied");
+        }
+    }
+}
+
+function GenerateKey($length = 16) {
+	$str = "";
+	$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));
+	$max = count($characters) - 1;
+	for ($i = 0; $i < $length; $i++) {
+		$rand = mt_rand(0, $max);
+		$str .= $characters[$rand];
+	}
+	return $str;
+}
+
+$elavonAPI = new ElavonAPI();
+$orderId = GenerateKey();
+$order = $elavonAPI->CreateOrder($_REQUEST["amount"],$orderId)->href;
+$session = $elavonAPI->CreatePaymentSession($order);
+
+print_r($session);
 ?>
+<script src="https://uat.hpp.converge.eu.elavonaws.com/client/library.js"></script>
 
 <h2 class="font-normal">Review</h2>
 <!-- Step 3 input fields -->
@@ -74,15 +102,86 @@ the <strong>continue</strong> button.
 
 </div>
 <div class="mt-3">
-
-    <form method="POST" id="SagePayForm" action="https://live.sagepay.com/gateway/service/vspform-register.vsp">
-        <input type="hidden" name="VPSProtocol" value="3.00" />
-        <input type="hidden" name="TxType" value="PAYMENT" />
-        <input type="hidden" name="Vendor" value="NYCOS" />
-        <input type="hidden" name="Crypt" value="<?php if ($_REQUEST["amount"]) { echo $sagePay->getCrypt();} ?>" />
-        <a href="nycos-donation" id="prevButton" class="btn btn-primary">Back</a>
-
-        <button class="btn btn-primary submit-btn" type="submit">Next</button>
+    <div id="payBox" class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">WARNING</h4>
+        <button id="payBtn" class="btn btn-primary submit-btn" onclick="onClickHandler();" type="submit">Submit</button>
+        <p>Do not leave the processing page until your payment has been confirmed.</p>
+    </div>
+    <form id="dataForm">
+        <input type="hidden" id="serial" value="<?= $contact->serialNumber; ?>" />
+        <input type="hidden" id="amount" value="<?= $_REQUEST['amount']; ?>" />
+        <input type="hidden" id="dest" value="<?= $_REQUEST['destinationCode']; ?>" />
+        <input type="hidden" id="orderid" value="<?= $orderId ?>" />
     </form>
 
+
+
 </div>
+
+<script type="text/javascript">
+    const MessageTypes = window.ConvergeLightbox.MessageTypes;
+
+    const submitData = (data) => {
+      // send data to your server
+      console.log(data);
+    };
+
+    function confirmPayment() {
+        var formdata = new FormData();
+        formdata.append("serial", document.getElementById('serial').value);
+        formdata.append("orderid", document.getElementById('orderid').value);
+        formdata.append("amount", document.getElementById('amount').value);
+        formdata.append("dest", document.getElementById('dest').value);
+
+        var requestOptions = {
+          method: 'POST',
+          body: formdata,
+          redirect: 'follow'
+        };
+
+        fetch("wp-content/plugins/simple-membership/ajax/submitDonation.php", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+
+
+        let btn = document.getElementById('payBox');
+        btn.innerHTML = "Thank you for making your payment <a href='nycos-home' class='btn btn-primary'>Back</a>";
+    }
+
+    let lightbox;
+
+    function onClickHandler() {
+      // do work to create a sessionId
+      const sessionId = '<?= $session->id ?>';
+      if (!lightbox) {
+        lightbox = new window.ConvergeLightbox({
+          sessionId: sessionId,
+          onReady: (error) =>
+            error
+              ? console.error('Lightbox failed to load')
+              : lightbox.show(),
+          messageHandler: (message, defaultAction) => {
+            switch (message.type) {
+              case MessageTypes.transactionCreated:
+                submitData({
+                  sessionId: message.sessionId,
+                });
+                    confirmPayment();
+                break;
+              case MessageTypes.hostedCardCreated:
+                submitData({
+                  convergePaymentToken: message.hostedCard,
+                  hostedCard: message.hostedCard,
+                  sessionId: message.sessionId,
+                });
+                break;
+            }
+            defaultAction();
+          },
+        });
+      } else {
+        lightbox.show();
+      }
+    }
+</script>

@@ -1,8 +1,8 @@
 <?php
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/class/ContactConsent.class.php');
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/class/Mailer.class.php');
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/class/Communication.class.php');
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/class/Attachment.class.php');
+require_once('class/ContactConsent.class.php');
+require_once('class/Mailer.class.php');
+require_once('class/Communication.class.php');
+require_once('class/Attachment.class.php');
 /**
  * NycosAPI
  *
@@ -43,7 +43,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -69,7 +69,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -92,11 +92,11 @@ class NycosAPI
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"userName\": \"ed6d78a8-ad30-4d29-aab7-a10cf9603965\", \"password\": \"A_Ce231!6v4V5zM\"}");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"userName\": \"4361fe19-80c1-4c78-a14a-c681f1ea7092\", \"password\": \"WF$26-6VifY-_wF\"}");
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -129,7 +129,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -163,7 +163,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -196,7 +196,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -229,7 +229,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -253,7 +253,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -277,7 +277,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -290,6 +290,109 @@ class NycosAPI
         return json_decode($result);
     }
 
+    public function putCreditMembership($detailId,$scheme,$reason,$amount){
+		$ch = curl_init();
+		$date=date('Y-m-d');
+		$firstDayNextMonth = date('Y-m-d', strtotime('first day of next month'));
+		//$expiry= date('Y-m-d', strtotime(' + 1 years'));
+		//$expiry=date('Y-m-d',strtotime('-1 day', strtotime($expiry)));
+
+
+		if (empty($amount)){
+            $extraString = '  "customFields": [
+	{
+	   "customFieldName": "RenewalBandId",
+      "customFieldValue": "'.$scheme.'"
+}]';
+        } else {
+
+            $extraString = '"customFields": [
+  {      "customFieldName": "RenewalBandId",
+      "customFieldValue": "'.$scheme.'"
+   },
+{
+"customFieldName": "RenewalDiscountAmount",
+      "customFieldValue": "'.$amount.'"
+},
+{
+    "customFieldName": "DiscountReason",
+      "customFieldValue": "'.$reason.'"
+}]';
+        }
+
+		$curlString = "{ ".$extraString." }";
+
+        curl_setopt_array($ch, array(
+          CURLOPT_URL => 'https://thankqwebapi.accessacloud.com/latest/api/memberships/'.$detailId,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'PUT',
+          CURLOPT_POSTFIELDS =>$curlString));
+
+		$headers = array();
+		$headers[] = 'Accept: text/plain';
+		$headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+		$headers[] = 'Authorization: Bearer '.$this->bearer;
+		$headers[] = 'Content-Type: application/json-patch+json';
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+		$result = curl_exec($ch);
+		if (curl_errno($ch)) {
+			echo 'Error:' . curl_error($ch);
+		}
+		curl_close($ch);
+		return json_decode($result);
+	}
+
+
+    public function putMembershipGetFees($detailId){
+		$ch = curl_init();
+		$date=date('Y-m-d');
+		$firstDayNextMonth = date('Y-m-d', strtotime('first day of next month'));
+		//$expiry= date('Y-m-d', strtotime(' + 1 years'));
+		//$expiry=date('Y-m-d',strtotime('-1 day', strtotime($expiry)));
+
+
+
+            $extraString = '  "customFields": [
+	{
+	   "customFieldName": "PutGetFees",
+      "customFieldValue": "-1"
+}]';
+
+		$curlString = "{ ".$extraString." }";
+
+        curl_setopt_array($ch, array(
+          CURLOPT_URL => 'https://thankqwebapi.accessacloud.com/latest/api/memberships/'.$detailId,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'PUT',
+          CURLOPT_POSTFIELDS =>$curlString));
+
+		$headers = array();
+		$headers[] = 'Accept: text/plain';
+		$headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+		$headers[] = 'Authorization: Bearer '.$this->bearer;
+		$headers[] = 'Content-Type: application/json-patch+json';
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+		$result = curl_exec($ch);
+		if (curl_errno($ch)) {
+			echo 'Error:' . curl_error($ch);
+		}
+		curl_close($ch);
+		return json_decode($result);
+	}
+
+
     public function postMemberGiftAid($serialNumber){
 
         $ch = curl_init();
@@ -301,7 +404,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -326,7 +429,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -342,13 +445,13 @@ class NycosAPI
     public function getPayments($serialNumber,$incomeType){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://thankqwebapi.accessacloud.com/latest/api/payments?SerialNumber='.$serialNumber);
+        curl_setopt($ch, CURLOPT_URL, 'https://thankqwebapi.accessacloud.com/latest/api/payments?SerialNumber='.$serialNumber.'&PageSize=200');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -371,7 +474,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -393,7 +496,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -403,6 +506,30 @@ class NycosAPI
         }
         curl_close($ch);
         return json_decode($result);
+    }
+
+    public function getLookup($lookup){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://thankqwebapi.accessacloud.com/latest/api/lookupvalue/?lookupName=NYCOS+Payment+Schedule',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+          CURLOPT_HTTPHEADER => array(
+            'x-api-key: 723F1FDA-7813-4738-88AB-E7914CF1A44E',
+            'Authorization: Bearer '.$this->bearer.'' ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $result = json_decode($response);
+        return $result->data;
     }
 
     public function getAttendeeType($typeId){
@@ -416,7 +543,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -440,7 +567,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -464,7 +591,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -488,7 +615,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -511,7 +638,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -534,7 +661,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -556,7 +683,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -578,7 +705,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -600,7 +727,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -612,6 +739,29 @@ class NycosAPI
         return json_decode($result);
     }
 
+    public function getProfiles($serialNumber){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://thankqwebapi.accessacloud.com/latest/api/contactprofiles?SerialNumber='.$serialNumber);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+
+        $headers = array();
+        $headers[] = 'Accept: text/plain';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
+        $headers[] = 'Authorization: Bearer '.$this->bearer;
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        return json_decode($result);
+    }
+
+
     public function getConsents($serialNumber){
         $ch = curl_init();
 
@@ -622,7 +772,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -644,7 +794,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -672,7 +822,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -700,7 +850,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -728,7 +878,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -765,7 +915,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -798,7 +948,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -822,7 +972,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -845,7 +995,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         $headers[] = 'Content-Type: application/json-patch+json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -867,7 +1017,7 @@ class NycosAPI
 
         $headers = array();
         $headers[] = 'Accept: text/plain';
-        $headers[] = 'X-Api-Key: 91C4A6B7-92A8-4B42-8E78-221E8B64E561';
+        $headers[] = 'X-Api-Key: 723F1FDA-7813-4738-88AB-E7914CF1A44E';
         $headers[] = 'Authorization: Bearer '.$this->bearer;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 

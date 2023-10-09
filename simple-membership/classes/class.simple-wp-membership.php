@@ -69,6 +69,7 @@ class SimpleWpMembership {
         add_shortcode('nycos_membership_payment', array(&$this, 'nycos_membership_payment'));
         add_shortcode('nycos_new_membership', array(&$this, 'nycos_new_membership'));
         add_shortcode('nycos_mem_payments', array(&$this, 'nycos_mem_payments'));
+        add_shortcode('nycos_rcmembership', array(&$this, 'nycos_rcmembership'));
 
         add_shortcode('nycos_donation', array(&$this, 'nycos_donation'));
         add_shortcode('nycos_donations', array(&$this, 'nycos_donations'));
@@ -727,6 +728,22 @@ class SimpleWpMembership {
             ob_start();
             //Load the welcome template
             SwpmUtilsTemplate::swpm_load_template('nycos_memberships.php', false);
+            return ob_get_clean();
+        }
+        return SwpmUtils::_('You are not logged in.');
+    }
+
+    public function nycos_rcmembership() {
+        $auth = SwpmAuth::get_instance();
+        $this->notices();
+        if ($auth->is_logged_in()) {
+            $out = apply_filters('swpm_profile_form_override', '');
+            if (!empty($out)) {
+                return $out;
+            }
+            ob_start();
+            //Load the welcome template
+            SwpmUtilsTemplate::swpm_load_template('nycos_rcmembership.php', false);
             return ob_get_clean();
         }
         return SwpmUtils::_('You are not logged in.');

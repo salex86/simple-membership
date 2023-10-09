@@ -1,5 +1,10 @@
 <?php
 
+if (empty($_SESSION["donationStart"])){
+    print "There has been an error or you have refreshed the page in error. Please contact NYCOS, quoting this message BookErr01";
+    return;
+}
+
 if($_REQUEST['crypt']){
     $sagePay = new SagePay();
     $responseArray = $sagePay->decode($_REQUEST['crypt']);
@@ -28,7 +33,7 @@ if($_REQUEST['crypt']){
     $orderid = $responseArray['VendorTxCode'];
     $amount = $responseArray['Amount'];
     //Check status of response
-   
+
 
     if ($_SESSION["paymentId"] == $orderid){
         $responseMessage = "Donation already made";
@@ -44,7 +49,7 @@ if($_REQUEST['crypt']){
             $email = new Mailer();
             $email->setDonationMessage($mainContact->firstName,$mainContact->keyname,$amount,$orderid,false);
             $email->send($mainContact->emailAddress);
-            
+
             //print $batchId;
             $_SESSION["paymentId"] = $orderid;
             $responseMessage = "Thank you for your donation";
@@ -57,7 +62,7 @@ if($_REQUEST['crypt']){
         }
     }
 }
-
+$_SESSION["donationStart"] = "";
 ?>
 
 <h2 class="font-normal">Confirmation</h2>

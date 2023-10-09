@@ -1,5 +1,5 @@
 <?php
-require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/SagePay.php');
+require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/ElavonAPI.php');
 require_once(SIMPLE_WP_MEMBERSHIP_PATH.'/lib/NycosAPI.php');
 ini_set('session.gc_maxlifetime', 3600);
 session_start();
@@ -21,14 +21,6 @@ if (!$event->publishToWeb){
     print "This event is not available yet";
 } else {
     //if logged in check if booking exists
-    if ($contact->serialNumber){
-        $p_eventBooking = $nycosAPI->getAPI('eventBooking/?SerialNumber='.$contact->serialNumber.'&EventId='.$_REQUEST['id'],'');
-
-        if (count($p_eventBooking->data) > 0){
-            print "You already have a booking for this event";
-            return;
-        }
-    }
 
 ?>
 

@@ -38,7 +38,7 @@ if (empty($contact->serialNumber)){
         <div class="col-md-6">
             <h3>Memberships</h3>
             <p>
-                Create a <a href="nycos-new-membership">new membership</a>, view your <a href="nycos-memberships">existing memberships</a> to make a membership payment or view your <a href="nycos-mem-payments">membership payment history</a>.
+                Join or Renew a <a href="nycos-rcmembership">Regional Choir</a>, view your <a href="nycos-memberships">existing memberships</a> to make a membership payment or view your <a href="nycos-mem-payments">membership payment history</a>.
             </p>
         </div>
         <div class="col-md-6">

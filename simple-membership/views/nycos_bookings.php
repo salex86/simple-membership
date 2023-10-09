@@ -29,8 +29,8 @@ $eventBooking = new EventBooking();
                     <th style="text-align:left">Name</th>
                     <th style="text-align:left">Start Date</th>
                     <th style="text-align:left">Tickets</th>
-                    <th> Outstanding </th>
-                    <th> Options </th>           
+                    <th> Balance </th>
+                    <th> Make Payment </th>           
                 </tr>
                 <?php foreach ($bookings->data as $item) {
                           $data = $nycosAPI->getEvent($item->eventId);
@@ -47,11 +47,12 @@ $eventBooking = new EventBooking();
                     </td>
                     <td class="tdMid"><?= $item->numberOfPlaces ?>
                     </td>
-                    <td><?php empty($item->outstanding)? print "Cleared": print $item->outstanding  ?></td>
+                    <td><?php empty($item->outstanding)? print "Paid": print "&pound; ". $item->outstanding  ?></td>
                     <td><?php if (!empty($item->outstanding)) { ?>
-                        <form action="/NYCOS-Booking-payment?bookingId=<?= $item->bookingId ?>">
-                            <input type="text" placeholder="How much of this would you like to pay" />
-                            <button id="payBtn" name="amount" type="submit"></button>
+                        <form action="/NYCOS-Booking-review?bookingId=<?= $item->bookingId ?>">
+                            <input class="form-control" type="text" name="amount" placeholder="Payment amount" />
+                            <input type="hidden" name="bookingId" value="<?= $item->bookingId ?>" />
+                            <button id="payBtn" class="btn btn-primary" type="submit">Pay</button>
                         </form>                    
                     <?php } ?> </td>
                 </tr>

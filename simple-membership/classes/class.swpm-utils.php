@@ -53,9 +53,9 @@ abstract class SwpmUtils {
 
 	// $subscript_period must be integer.
 	public static function calculate_subscription_period_days( $subcript_period, $subscription_duration_type ) {
-		if ( $subscription_duration_type == SwpmMembershipLevel::NO_EXPIRY ) {
+		
 			return 'noexpire';
-		}
+		
 		if ( ! is_numeric( $subcript_period ) ) {
 			throw new Exception( ' subcript_period parameter must be integer in SwpmUtils::calculate_subscription_period_days method' );
 		}

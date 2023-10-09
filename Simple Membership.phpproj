@@ -3,8 +3,8 @@
     <ProjectGuid>b18b22e5-b781-4dc2-980d-aea0d27d0059</ProjectGuid>
     <RootNamespace>Simple_Membership</RootNamespace>
     <WebRoot />
-    <RuntimeVersion>7.1</RuntimeVersion>
-    <SpecificPageValue>testfiles/testconnection.php</SpecificPageValue>
+    <RuntimeVersion>8.0</RuntimeVersion>
+    <SpecificPageValue>testfiles/getMemberInfo_excel.php</SpecificPageValue>
     <StartAction>SpecificPage</StartAction>
   </PropertyGroup>
   <ItemGroup>
